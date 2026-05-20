@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn for diplomchik Django
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/diplomchik/backend
+EnvironmentFile=/var/www/diplomchik/backend/.env
+ExecStart=/var/www/diplomchik/backend/.venv/bin/gunicorn config.wsgi:application --bind 127.0.0.1:8001 --workers 3 --timeout 120
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
